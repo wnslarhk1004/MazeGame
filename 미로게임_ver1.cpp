@@ -3,11 +3,11 @@
 using namespace std;
 
 /*
-±ÔÄ¢
-0 : º®
-1 : ±æ
-2 : ½ÃÀÛÁ¡
-3 : µµÂøÁ¡
+ê·œì¹™
+0 : ë²½
+1 : ê¸¸
+2 : ì‹œì‘ì 
+3 : ë„ì°©ì 
 */
 
 struct _tagPoint
@@ -16,12 +16,12 @@ struct _tagPoint
 	int y;
 };
 
-// typedef : Å¸ÀÔÀ» ÀçÁ¤ÀÇ ÇÏ´Â ±â´ÉÀÌ´Ù.
+// typedef : íƒ€ì…ì„ ì¬ì •ì˜ í•˜ëŠ” ê¸°ëŠ¥ì´ë‹¤.
 typedef _tagPoint	 POINT;
 typedef _tagPoint * PPOINT;
 
 void SetMaze(char Maze[21][21], PPOINT pPlayerPos, PPOINT pStartPos,
-	PPOINT pEndPos) // Æ÷ÀÎÅÍ ±¸Á¶Ã¼ÀÌ¹Ç·Î *¾øÀ½
+	PPOINT pEndPos) // í¬ì¸í„° êµ¬ì¡°ì²´ì´ë¯€ë¡œ *ì—†ìŒ
 {
 	pStartPos->x = 0;
 	pStartPos->y = 0;
@@ -32,7 +32,7 @@ void SetMaze(char Maze[21][21], PPOINT pPlayerPos, PPOINT pStartPos,
 	pPlayerPos->x = 0;
 	pPlayerPos->y = 0;
 	*/
-	// StartPos¿Í PlayerPos´Â °°Àº À§Ä¡
+	// StartPosì™€ PlayerPosëŠ” ê°™ì€ ìœ„ì¹˜
 	*pPlayerPos = *pStartPos;
 
 	strcpy_s(Maze[0], "21100000000000000000");
@@ -59,21 +59,21 @@ void SetMaze(char Maze[21][21], PPOINT pPlayerPos, PPOINT pStartPos,
 
 void Output(char Maze[21][21], PPOINT pPlayerPos)
 {
-	// 2Â÷¿ø ¹è¿­ ¹İº¹À» µ¹¸®±â À§ÇØ 2Áß for¹® ÀÌ¿ë
-	for (int i = 0; i < 20; ++i) // ¼¼·Î
+	// 2ì°¨ì› ë°°ì—´ ë°˜ë³µì„ ëŒë¦¬ê¸° ìœ„í•´ 2ì¤‘ forë¬¸ ì´ìš©
+	for (int i = 0; i < 20; ++i) // ì„¸ë¡œ
 	{
-		for (int j = 0; j < 20; ++j) // °¡·Î
+		for (int j = 0; j < 20; ++j) // ê°€ë¡œ
 		{
 			if (pPlayerPos->x == j && pPlayerPos->y == i)
-				cout << "¡Ù";
-			else if (Maze[i][j] == '0') // º®
-				cout << "¡á"; // ÇÑ±ÛÆùÆ®ÀÌ¹Ç·Î 2byte
-			else if (Maze[i][j] == '1') // ±æ
-				cout << "  "; // 2byteÀÌ¹Ç·Î space bar 2°³
-			else if (Maze[i][j] == '2') // Ãâ¹ßÁ¡
-				cout << "¡Ú";
-			else if (Maze[i][j] == '3') // µµÂøÁ¡
-				cout << "¡İ";
+				cout << "â˜†";
+			else if (Maze[i][j] == '0') // ë²½
+				cout << "â– "; // í•œê¸€í°íŠ¸ì´ë¯€ë¡œ 2byte
+			else if (Maze[i][j] == '1') // ê¸¸
+				cout << "  "; // 2byteì´ë¯€ë¡œ space bar 2ê°œ
+			else if (Maze[i][j] == '2') // ì¶œë°œì 
+				cout << "â˜…";
+			else if (Maze[i][j] == '3') // ë„ì°©ì 
+				cout << "â—";
 		}
 		cout << endl;
 	}
@@ -81,10 +81,10 @@ void Output(char Maze[21][21], PPOINT pPlayerPos)
 
 void MoveUp(char Maze[21][21], PPOINT pPlayerPos)
 {
-	// ¿¹¿ÜÃ³¸®
-	if (pPlayerPos->y - 1 >= 0) // À§·Î ¿Ã¶ó°¡´Â Ä¿¸Çµå
+	// ì˜ˆì™¸ì²˜ë¦¬
+	if (pPlayerPos->y - 1 >= 0) // ìœ„ë¡œ ì˜¬ë¼ê°€ëŠ” ì»¤ë§¨ë“œ
 	{
-		// º®ÀÎÁö Ã¼Å©ÇÑ´Ù.
+		// ë²½ì¸ì§€ ì²´í¬í•œë‹¤.
 		if (Maze[pPlayerPos->y - 1][pPlayerPos->x] != '0')
 		{
 			--pPlayerPos->y;
@@ -94,10 +94,10 @@ void MoveUp(char Maze[21][21], PPOINT pPlayerPos)
 
 void MoveDown(char Maze[21][21], PPOINT pPlayerPos)
 {
-	// ¿¹¿ÜÃ³¸®
-	if (pPlayerPos->y + 1 < 20) // ¾Æ·¡·Î ³»·Á°¡´Â Ä¿¸Çµå
+	// ì˜ˆì™¸ì²˜ë¦¬
+	if (pPlayerPos->y + 1 < 20) // ì•„ë˜ë¡œ ë‚´ë ¤ê°€ëŠ” ì»¤ë§¨ë“œ
 	{
-		// º®ÀÎÁö Ã¼Å©ÇÑ´Ù.
+		// ë²½ì¸ì§€ ì²´í¬í•œë‹¤.
 		if (Maze[pPlayerPos->y + 1][pPlayerPos->x] != '0')
 		{
 			++pPlayerPos->y;
@@ -107,10 +107,10 @@ void MoveDown(char Maze[21][21], PPOINT pPlayerPos)
 
 void MoveRight(char Maze[21][21], PPOINT pPlayerPos)
 {
-	// ¿¹¿ÜÃ³¸®
-	if (pPlayerPos->x + 1 < 20) // ¿À¸¥ÂÊÀ¸·Î ÀÌµ¿ÇÏ´Â Ä¿¸Çµå
+	// ì˜ˆì™¸ì²˜ë¦¬
+	if (pPlayerPos->x + 1 < 20) // ì˜¤ë¥¸ìª½ìœ¼ë¡œ ì´ë™í•˜ëŠ” ì»¤ë§¨ë“œ
 	{
-		// º®ÀÎÁö Ã¼Å©ÇÑ´Ù.
+		// ë²½ì¸ì§€ ì²´í¬í•œë‹¤.
 		if (Maze[pPlayerPos->y][pPlayerPos->x + 1] != '0')
 		{
 			++pPlayerPos->x;
@@ -120,10 +120,10 @@ void MoveRight(char Maze[21][21], PPOINT pPlayerPos)
 
 void MoveLeft(char Maze[21][21], PPOINT pPlayerPos)
 {
-	// ¿¹¿ÜÃ³¸®
-	if (pPlayerPos->x - 1 >= 0) // ¿ŞÂÊÀ¸·Î ÀÌµ¿ÇÏ´Â Ä¿¸Çµå
+	// ì˜ˆì™¸ì²˜ë¦¬
+	if (pPlayerPos->x - 1 >= 0) // ì™¼ìª½ìœ¼ë¡œ ì´ë™í•˜ëŠ” ì»¤ë§¨ë“œ
 	{
-		// º®ÀÎÁö Ã¼Å©ÇÑ´Ù.
+		// ë²½ì¸ì§€ ì²´í¬í•œë‹¤.
 		if (Maze[pPlayerPos->y][pPlayerPos->x - 1] != '0')
 		{
 			--pPlayerPos->x;
@@ -135,7 +135,7 @@ void MovePlayer(char Maze[21][21], PPOINT pPlayerPos, char cInput)
 {
 	switch (cInput)
 	{
-		// ´ë¼Ò¹®ÀÚ Áö¿ø
+		// ëŒ€ì†Œë¬¸ì ì§€ì›
 	case 'w':
 	case 'W':
 		MoveUp(Maze, pPlayerPos);
@@ -157,30 +157,30 @@ void MovePlayer(char Maze[21][21], PPOINT pPlayerPos, char cInput)
 
 int main()
 {
-	// 20 x 20 ¹Ì·Î¸¦ ¸¸µé¾îÁØ´Ù.
+	// 20 x 20 ë¯¸ë¡œë¥¼ ë§Œë“¤ì–´ì¤€ë‹¤.
 	char strMaze[21][21] = {};
 
 	POINT	tPlayerPos;
 	POINT	tStartPos;
 	POINT	tEndPos;
 
-	// ¹Ì·Î¸¦ ¼³Á¤ÇÑ´Ù.
+	// ë¯¸ë¡œë¥¼ ì„¤ì •í•œë‹¤.
 	SetMaze(strMaze, &tPlayerPos, &tStartPos, &tEndPos);
 
 	while (true)
 	{
 		system("cls");
-		// ¹Ì·Î¸¦ Ãâ·ÂÇÑ´Ù.
+		// ë¯¸ë¡œë¥¼ ì¶œë ¥í•œë‹¤.
 		Output(strMaze, &tPlayerPos);
 
 		if (tPlayerPos.x == tEndPos.x && tPlayerPos.y == tEndPos.y)
 		{
-			cout << "µµÂøÇß½À´Ï´Ù." << endl;
+			cout << "ë„ì°©í–ˆìŠµë‹ˆë‹¤." << endl;
 			break;
 		}
 
-		cout << "w : À§ s : ¾Æ·¡ a : ¿ŞÂÊ d : ¿À¸¥ÂÊ q : Á¾·á : ";
-		char cInput = _getch(); // _getch()¸¦ ÀÌ¿ëÇØ¼­ ¹Ù·Î ¹İÀÀÇÏµµ·Ï!
+		cout << "w : ìœ„ s : ì•„ë˜ a : ì™¼ìª½ d : ì˜¤ë¥¸ìª½ q : ì¢…ë£Œ : ";
+		char cInput = _getch(); // _getch()ë¥¼ ì´ìš©í•´ì„œ ë°”ë¡œ ë°˜ì‘í•˜ë„ë¡!
 
 		if (cInput == 'q' || cInput == 'Q')
 			break;
