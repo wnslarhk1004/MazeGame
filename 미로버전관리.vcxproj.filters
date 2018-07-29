@@ -21,5 +21,8 @@
     <ClCompile Include="미로게임_ver2.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="미로게임_ver3.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
